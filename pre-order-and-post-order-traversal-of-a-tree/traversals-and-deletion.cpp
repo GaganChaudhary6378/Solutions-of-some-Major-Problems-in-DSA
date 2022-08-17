@@ -50,6 +50,12 @@ void postOrder(treenode<int>* root){
     }cout<<root->data<<" ";
 }
 
+void deleteTree(treenode<int>* root){
+    for(int i=0;i<root->children.size();i++){
+        deleteTree(root->children[i]);
+    }delete root;
+}
+
 int main(){
     treenode<int>* root=takeInputLevelWise();
     cout<<endl;
@@ -58,4 +64,17 @@ int main(){
     cout<<endl;
     cout<<"Post order traversal"<<endl;
     postOrder(root);
+
+    // Now the main thing is that , till now we have created our tree dynamically but the point is (we have not deallocated it) so for this we have two ways,
+    // 1) Either create a separate function 
+    // 2) create own destructor
+
+    // 1:-
+    // deleteTree(root);
+
+    // 2:-
+    delete root;
+
+
+    // NOTE:- Don't forget to delete the tree!! 
 }
