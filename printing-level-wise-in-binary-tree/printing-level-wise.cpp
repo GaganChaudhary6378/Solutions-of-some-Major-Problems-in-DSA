@@ -1,66 +1,79 @@
+
 #include <iostream>
 using namespace std;
-#include <queue>
 #include "binary-tree-class.cpp"
+#include <queue>
 
-BinaryTreeNode<int>* takeInputLevelWise(){
+void printLevelWise(binaryTreeNode<int> *root){
+    if(root==NULL){
+        return ;
+    }if(root->data==-1){
+        return;
+    }
+
+    queue<binaryTreeNode<int>*> pendingNodes;
+    pendingNodes.push(root);
+    while(pendingNodes.size()!=0){
+        binaryTreeNode<int>* front=pendingNodes.front();
+        pendingNodes.pop();
+        cout<<front->data<<": ";
+        if(front->left!=NULL){
+            binaryTreeNode<int>* leftchild=front->left;
+            cout<<"L"<<front->left->data<<",";
+            pendingNodes.push(leftchild);
+        }
+        else{
+            cout<<"L-1,";
+        }
+        if(front->right!=NULL){
+            binaryTreeNode<int>* rightchild=front->right;
+            cout<<"R"<<front->right->data;
+            pendingNodes.push(rightchild);
+        }
+        else{
+            cout<<"R-1";
+        }
+        cout<<endl;
+    }
+}
+
+
+
+
+binaryTreeNode<int> *takeInputLevelWise(){
     int data;
-    cout<<"Enter root data"<<endl;
+    cout<<"Enter root data: ";
     cin>>data;
     if(data==-1){
         return NULL;
     }
-    BinaryTreeNode<int>* root=new BinaryTreeNode<int>(data);
-    queue<BinaryTreeNode<int>*> restNodes;
-    restNodes.push(root);
-    while(restNodes.size()!=0){
-        BinaryTreeNode<int>* front=restNodes.front();
-        restNodes.pop();
-        cout<<"Enter left child of "<<front->data<<endl;
-        int leftchild;
-        cin>>leftchild;
-        if(leftchild!=-1){
-            BinaryTreeNode<int>* child=new BinaryTreeNode<int>(leftchild);
-            front->left=child;
-            restNodes.push(child);
+    binaryTreeNode<int> *root=new binaryTreeNode<int>(data);
+    queue<binaryTreeNode<int>*> remainingNodes;
+    remainingNodes.push(root);
+    while(remainingNodes.size()!=0){
+        binaryTreeNode<int>* front=remainingNodes.front();
+        remainingNodes.pop();
+        int leftChildData;
+        cout<<"Enter the data of left child of "<<front->data<<": ";
+        cin>>leftChildData;
+        if(leftChildData!=-1){
+            binaryTreeNode<int> *leftChild=new binaryTreeNode<int>(leftChildData);
+            front->left=leftChild;
+            remainingNodes.push(leftChild);
         }
-        cout<<"Enter right child of "<<front->data<<endl;
-        int rightchild;
-        cin>>rightchild;
-        if(rightchild!=-1){
-            BinaryTreeNode<int>* child=new BinaryTreeNode<int>(rightchild);
-            front->right=child;
-            restNodes.push(child);
+        int rightChildData;
+        cout<<"Enter the data of right child of "<<front->data<<": ";
+        cin>>rightChildData;
+        if(rightChildData!=-1){
+            binaryTreeNode<int> *rightChild=new binaryTreeNode<int>(rightChildData);
+            front->right=rightChild;
+            remainingNodes.push(rightChild);
         }
     }
     return root;
 }
 
-void printLevelWise(BinaryTreeNode<int>* root){
-    if(root==NULL){
-        return;
-    }
-    queue<BinaryTreeNode<int>*> restNode;
-    restNode.push(root);
-    while(restNode.size()!=0){
-        BinaryTreeNode<int>* front=restNode.front();
-        restNode.pop();
-        cout<<front->data<<" ";
-        if(front->left!=NULL){
-        BinaryTreeNode<int>* child=front->left;
-        cout<<"L"<<child->data<<" ";
-        restNode.push(child);
-        }
-        if(front->right!=NULL){
-            BinaryTreeNode<int>* child=front->right;
-            cout<<"R"<<child->data;
-            restNode.push(child);
-        }cout<<endl;
-    }
-
-}
 int main(){
-    BinaryTreeNode<int>* root=takeInputLevelWise();
-    cout<<endl;
+    binaryTreeNode<int>* root=takeInputLevelWise();
     printLevelWise(root);
 }

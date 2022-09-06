@@ -1,17 +1,17 @@
 template <typename T>
-class BinaryTreeNode{
+class binaryTreeNode{
     public:
     T data;
-    BinaryTreeNode* left;
-    BinaryTreeNode* right;
+    binaryTreeNode* left;
+    binaryTreeNode* right;
 
-    BinaryTreeNode(T data){
+    binaryTreeNode(T data){
         this->data=data;
         left=NULL;
         right=NULL;
     }
 
-    ~BinaryTreeNode(){
+    ~binaryTreeNode(){
         delete left;
         delete right;
     }
