@@ -44,9 +44,9 @@ void printAtK(treenode<int>* root,int k){
 int main(){
     treenode<int>* root=takeInputLevelWise();
     cout<<endl;
-    int k;
+    int x;
     cout<<"Enter the level which you want to print"<<endl;
-    cin>>k;
-    cout<<"Printing at level : "<<k<<endl;
-    printAtK(root,k);
+    cin>>x;
+    cout<<"Printing at level : "<<x<<endl;
+    printAtK(root,x);
 }
