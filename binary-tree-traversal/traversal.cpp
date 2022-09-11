@@ -81,10 +81,32 @@ void inOrder(binaryTreeNode<int>* root){
     cout<<root->data<<" ";
     inOrder(root->right);
 }
+void preOrderBinaryTraversal(binaryTreeNode<int>* root){
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data<<" ";
+    preOrderBinaryTraversal(root->left);
+    preOrderBinaryTraversal(root->right);
+}
+void postOrderTraversal(binaryTreeNode<int>* root){
+    if(root==NULL){
+        return;
+    }
+    postOrderTraversal(root->left);
+    postOrderTraversal(root->right);
+    cout<<root->data<<" ";
+}
 
 int main(){
     binaryTreeNode<int>* root=takeInputLevelWise();
     printLevelWise(root);
+    cout<<"In order traversal is"<<endl;
     inOrder(root);
-
+    cout<<endl;
+    cout<<"Pre order traversal is"<<endl;
+    preOrderBinaryTraversal(root);
+    cout<<endl;
+    cout<<"Post order traversal is"<<endl;
+    postOrderTraversal(root);
 }
