@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-// DFS for connected graoh
+// DFS for disconnected graph
 void printDFS(int **edges,int n,int sv,bool * visited){
     cout<<sv<<endl;
     visited[sv]=true;
@@ -18,7 +18,7 @@ void printDFS(int **edges,int n,int sv,bool * visited){
     }
 }
 
-// BFS for connected graph
+// BFS for disconnected graph
 
 void printBFS(int ** edges,int n,int sv,bool * visited){
     queue<int> remainingData;
