@@ -1,6 +1,8 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
+// DFS
 void print(int **edges,int n,int sv,bool * visited){
     cout<<sv<<endl;
     visited[sv]=true;
@@ -13,6 +15,35 @@ void print(int **edges,int n,int sv,bool * visited){
             }
             print(edges,n,i,visited);
         }
+    }
+}
+
+// BFS traversal
+
+void BFStraversal(int ** edges,int n,int sv){
+    bool * visited=new bool[n];
+    for(int i=0;i<n;i++){
+        visited[i]=false;
+    }
+    queue<int> remainingData;
+    remainingData.push(sv);
+    visited[sv]=true;
+    while(remainingData.size()!=0){
+        int front=remainingData.front();
+        remainingData.pop();
+        cout<<front<<" ";
+        for(int i=0;i<n;i++){
+            if(i==front){
+                continue;
+            }if(edges[front][i]==1){
+                if(visited[i]){
+                    continue;
+                }
+                remainingData.push(i);
+                visited[i]=true;
+            }
+        }
+
     }
 }
 
@@ -38,5 +69,9 @@ int main(){
     for(int i=0;i<n;i++){
         visited[i]=false;
     }
+    cout<<"Required DFS traversal of a graph is :-"<<endl;
     print(edges,n,0,visited);
+    cout<<"Required BFS traversal of a graph is :-"<<endl;
+    BFStraversal(edges,n,0);
+
 }
